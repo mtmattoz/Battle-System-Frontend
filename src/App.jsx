@@ -10,12 +10,20 @@ function App() {
       <div className="titulo-vinheta" aria-hidden="true" />
 
       <div className="titulo-acoes">
-        <button
-          className="btn-selo titulo-botao"
-          onClick={() => navigate('/select')}
-        >
-          Começar batalha
-        </button>
+        <div className="titulo-botoes">
+          <button
+            className="btn-selo titulo-botao"
+            onClick={() => navigate('/select')}
+          >
+            Começar batalha
+          </button>
+          <button
+            className="btn-tinta titulo-botao-secundario"
+            onClick={() => navigate('/historias')}
+          >
+            Pergaminhos ninja
+          </button>
+        </div>
         <p className="titulo-dica">
           Escolha seu ninja, escolha o rival e lute até o HP de alguém zerar.
         </p>

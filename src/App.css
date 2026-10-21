@@ -62,6 +62,19 @@
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 
+.titulo-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.titulo-botao-secundario {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  padding: 0.8em 2em;
+}
+
 @keyframes titulo-entrada {
   from {
     opacity: 0;
@@ -82,4 +95,5 @@
     opacity: 1;
     transform: translateY(0);
   }
+
 }

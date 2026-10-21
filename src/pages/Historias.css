@@ -1,0 +1,357 @@
+/* ============================================================
+   Pergaminhos ninja (histórias dos personagens)
+   ============================================================ */
+
+.hist {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5vh 3vw 3.5vh;
+  gap: 2.5vh;
+}
+
+.hist-fundo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(13, 20, 36, 0.78), rgba(13, 20, 36, 0.94)),
+    url('/imagens/background/JapanBg.png') center top / cover no-repeat;
+}
+
+/* ---------- Topo ---------- */
+.hist-topo {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.hist-voltar {
+  justify-self: start;
+  padding: 0.55em 1.6em;
+}
+
+.hist-titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  text-align: center;
+  color: var(--washi);
+  text-shadow: 0 3px 0 var(--tinta), 0 0 24px rgba(200, 40, 30, 0.45);
+}
+
+.hist-aviso {
+  margin: auto;
+  padding: 1.2rem 1.6rem;
+  max-width: 44ch;
+  text-align: center;
+  color: var(--texto-suave);
+  background: rgba(5, 7, 13, 0.7);
+}
+
+/* ---------- Corpo ---------- */
+.hist-corpo {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(210px, 260px) minmax(0, 1fr);
+  gap: 2.5vw;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Lista de ninjas */
+.hist-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.hist-item {
+  --cor: var(--ouro);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 8px 8px;
+  text-align: left;
+  cursor: pointer;
+  border: 2px solid rgba(239, 227, 200, 0.14);
+  border-left: 4px solid transparent;
+  background: rgba(5, 7, 13, 0.72);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.hist-item img {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  object-position: center 20%;
+  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--cor) 45%, transparent), var(--noite-2) 80%);
+  filter: grayscale(0.5);
+  transition: filter 0.15s;
+}
+
+.hist-item-texto {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hist-item-texto strong {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.hist-item-texto small {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hist-item:hover {
+  background: rgba(23, 33, 58, 0.9);
+}
+
+.hist-item:hover img,
+.hist-item.is-ativo img {
+  filter: none;
+}
+
+.hist-item.is-ativo {
+  border-color: rgba(239, 227, 200, 0.25);
+  border-left-color: var(--cor);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--cor) 28%, var(--noite-2)), rgba(5, 7, 13, 0.85));
+}
+
+.hist-item.is-ativo .hist-item-texto small {
+  color: color-mix(in srgb, var(--cor) 55%, white);
+}
+
+/* ---------- Pergaminho aberto ---------- */
+.hist-pergaminho {
+  --cor: var(--ouro);
+  min-height: 0;
+  margin: 16px 10px;
+  padding: 1.6rem 2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  overflow: hidden;
+  animation: hist-desenrola 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes hist-desenrola {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(-20px -20px -20px -20px);
+  }
+}
+
+.hist-cabecalho {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+
+/* Moldura do GIF */
+.hist-retrato {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  padding: 6px;
+  background: #2b1d10;
+  border: 3px solid var(--cor);
+  box-shadow: 0 0 0 4px #2b1d10, 0 10px 24px rgba(60, 30, 10, 0.45);
+  transform: rotate(-1.5deg);
+}
+
+.hist-retrato-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hist-retrato-img--arte {
+  object-fit: contain;
+  object-position: bottom center;
+  background: radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--cor) 45%, #2b1d10), #2b1d10 75%);
+}
+
+.hist-ficha {
+  min-width: 0;
+}
+
+.hist-nome {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1;
+  color: #2b1d10;
+}
+
+.hist-subtitulo {
+  margin: 0.35rem 0 0;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--cor) 70%, #2b1d10);
+}
+
+.hist-dados {
+  display: flex;
+  gap: 1.6rem;
+  margin: 1rem 0 0.8rem;
+}
+
+.hist-dados div {
+  display: flex;
+  flex-direction: column;
+}
+
+.hist-dados dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #7a5a3a;
+}
+
+.hist-dados dd {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: #6b1a12;
+}
+
+.hist-jutsus {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hist-jutsus li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed rgba(107, 26, 18, 0.25);
+}
+
+.hist-jutsu-nome {
+  font-weight: 700;
+  color: #2b1d10;
+}
+
+.hist-jutsu-info {
+  font-size: 0.85rem;
+  color: #7a5a3a;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Texto da história */
+.hist-texto {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+  padding-top: 1rem;
+  border-top: 2px solid rgba(107, 26, 18, 0.25);
+  scrollbar-width: thin;
+  scrollbar-color: #8a5a2a transparent;
+}
+
+.hist-texto p {
+  margin: 0 0 1rem;
+  max-width: 72ch;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #2b1d10;
+}
+
+.hist-texto p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--fonte-titulo);
+  font-size: 3.2em;
+  line-height: 0.8;
+  color: #6b1a12;
+}
+
+.hist-sem-historia {
+  font-style: italic;
+  color: #7a6a52 !important;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .hist {
+    height: auto;
+    min-height: 100vh;
+    padding: 16px 16px 32px;
+  }
+
+  .hist-topo {
+    grid-template-columns: auto 1fr;
+  }
+
+  .hist-topo-espaco {
+    display: none;
+  }
+
+  .hist-titulo {
+    text-align: right;
+  }
+
+  .hist-corpo {
+    grid-template-columns: 1fr;
+  }
+
+  .hist-lista {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .hist-item {
+    flex: none;
+  }
+
+  .hist-item-texto small {
+    display: none;
+  }
+
+  .hist-pergaminho {
+    margin: 16px 4px;
+    padding: 1.2rem 1.1rem;
+  }
+
+  .hist-cabecalho {
+    grid-template-columns: 1fr;
+  }
+
+  .hist-texto {
+    overflow: visible;
+  }
+}

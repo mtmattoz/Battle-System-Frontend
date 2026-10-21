@@ -3,6 +3,7 @@ import App from './App.jsx';
 import Select from './pages/Select.jsx';
 import Batalha from './pages/Battle.jsx';
 import Fim from './pages/Fim.jsx';
+import Historias from './pages/Historias.jsx';
 
 export default function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
         <Route path="/select" element={<Select />} />
         <Route path="/batalha" element={<Batalha />}/>
         <Route path="/fim" element={<Fim/>}/>
+        <Route path="/historias" element={<Historias />} />
       </Routes>
     </BrowserRouter>
   );
