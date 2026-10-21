@@ -1,0 +1,179 @@
+/* ============================================================
+   Naruto Pixel Battle — base visual
+   Noite em Konoha: índigo profundo, papel de pergaminho,
+   vermelho de selo e a cor de chakra de cada ninja.
+   ============================================================ */
+
+:root {
+  --noite: #0d1424;          /* fundo base, índigo da grande onda */
+  --noite-2: #17213a;        /* painéis escuros */
+  --tinta: #05070d;          /* contornos e sombras de tinta */
+  --washi: #efe3c8;          /* papel de pergaminho */
+  --washi-escuro: #c9b48a;
+  --selo: #c8281e;           /* vermelho de selo / ação principal */
+  --selo-claro: #e8473b;
+  --ouro: #e8b04a;           /* destaque de seleção */
+  --chakra: #6fd3ff;         /* brilho de impacto */
+  --texto: #f3eee2;
+  --texto-suave: #b9b3a5;
+
+  --hp-alto: #5fd068;
+  --hp-medio: #f0c53c;
+  --hp-baixo: #e8473b;
+
+  --fonte-titulo: "Shojumaru", "Chakra Petch", serif;
+  --fonte-hud: "Chakra Petch", system-ui, sans-serif;
+
+  --corte: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: var(--noite);
+  color: var(--texto);
+  font-family: var(--fonte-hud);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ouro);
+  outline-offset: 3px;
+}
+
+/* ---------- Botão de selo (ação principal do jogo) ---------- */
+.btn-selo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.85em 2.4em;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--fonte-titulo);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: #fff6e6;
+  background: linear-gradient(180deg, var(--selo-claro), var(--selo) 55%, #8f150f);
+  clip-path: var(--corte);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
+  filter: drop-shadow(0 6px 0 var(--tinta));
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn-selo:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 8px 0 var(--tinta)) brightness(1.08);
+}
+
+.btn-selo:active {
+  transform: translateY(3px);
+  filter: drop-shadow(0 2px 0 var(--tinta));
+}
+
+.btn-selo:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.8) drop-shadow(0 4px 0 var(--tinta));
+  opacity: 0.6;
+}
+
+/* Botão secundário: tinta escura com borda dourada */
+.btn-tinta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em 2em;
+  border: 2px solid var(--ouro);
+  cursor: pointer;
+  font-family: var(--fonte-hud);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ouro);
+  background: rgba(5, 7, 13, 0.75);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-tinta:hover {
+  background: var(--ouro);
+  color: var(--tinta);
+}
+
+/* ---------- Painel de pergaminho ---------- */
+.pergaminho {
+  position: relative;
+  color: #2b1d10;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(150, 110, 50, 0.25), transparent 55%),
+    var(--washi);
+  border-top: 10px solid #6b1a12;
+  border-bottom: 10px solid #6b1a12;
+  box-shadow:
+    inset 0 0 40px rgba(120, 80, 30, 0.35),
+    0 12px 30px rgba(0, 0, 0, 0.55);
+}
+
+.pergaminho::before,
+.pergaminho::after {
+  content: "";
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  height: 14px;
+  background: linear-gradient(180deg, #3a1a0e, #7a2c18 50%, #3a1a0e);
+  border-radius: 7px;
+}
+
+.pergaminho::before {
+  top: -16px;
+}
+
+.pergaminho::after {
+  bottom: -16px;
+}
+
+/* ---------- Movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Em telas pequenas permite rolagem */
+@media (max-width: 900px) {
+  body {
+    overflow: auto;
+  }
+}
